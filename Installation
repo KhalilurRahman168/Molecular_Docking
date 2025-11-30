@@ -1,1 +1,13 @@
+#Visit https://vina.scripps.edu/downloads/ and download autodock_vina_1_1_2_linux_x86.tgz
+
+#Store in /home/khalil/Documents/Molecular_Docking
+$cd /home/khalil/Documents/Molecular_Docking/
+
+#Installing
+$tar xzvf autodock_vina_1_1_2_linux_x86.tgz
+
+#Add Vina to your PATH
+$nano ~/.bashrc
+$export PATH="$HOME/Software/autodock_vina_1_1_2_linux_x86/bin:$PATH"
+$source ~/.bashrc
 
