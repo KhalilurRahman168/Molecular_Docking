@@ -1,1 +1,19 @@
+Optional: make it permanent
+
+export LD_LIBRARY_PATH=/home/khalil/Documents/Software/mgltools_x86_64Linux2_1.5.7/lib:$LD_LIBRARY_PATH
+Then reload:
+source ~/.bashrc
+
+#Protein Preparation
+"/home/khalil/Documents/Software/mgltools_x86_64Linux2_1.5.7/bin/python2.7"  "/home/khalil/Documents/Software/mgltools_x86_64Linux2_1.5.7/MGLToolsPckgs/AutoDockTools/Utilities24/prepare_pdb_split_alt_confs.py" -p ctxB1.pdb
+"/home/khalil/Documents/Software/mgltools_x86_64Linux2_1.5.7/bin/python2.7" "/home/khalil/Documents/Software/mgltools_x86_64Linux2_1.5.7/MGLToolsPckgs/AutoDockTools/Utilities24/prepare_receptor4.py" -r ctxB1.pdb -o ctxB1.pdbqt -A checkhydrogens -charges_to_add Kollman
+
+#Ligand preparation
+Add hydrogen and minimize energy (obabel already in my path)
+$obabel GM1.pdb -O GM1_m.pdb -h --minimize --ff MMFF94 --steps 5000
+
+$"/home/khalil/Documents/Software/mgltools_x86_64Linux2_1.5.7/bin/python2.7" "/home/khalil/Documents/Software/mgltools_x86_64Linux2_1.5.7/MGLToolsPckgs/AutoDockTools/Utilities24/prepare_ligand4.py" -l GM1_m.pdb -o GM11.pdbqt
+
+#Vina run
+vina --receptor ctxB1.pdbqt --ligand GM11.pdbqt --center_x -6.433 --center_y 11.695 --center_z 10.41 --size_x 78 --size_y 66 --size_z 84 --out gm1.out --log gm1.log --exhaustiveness 8 
 
